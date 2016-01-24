@@ -1,0 +1,13 @@
+<?php if ($this->message && $this->code) : ?>
+    <?php if ($this->code == \TmCommon\Config\Config::POPUP_MESSAGE_SUCCESS_CODE) : ?>
+<!--        <div class="alert alert-dismissable alert-success">-->
+<!--            <button type="button" class="close" data-dismiss="alert">×</button>-->
+<!--            <p>--><?php //echo $this->message ?><!--</p>-->
+<!--        </div>-->
+    <?php elseif ($this->code == \TmCommon\Config\Config::POPUP_MESSAGE_ERROR_CODE) : ?>
+        <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><?php echo $this->message ?></p>
+        </div>
+    <?php endif ?>
+<?php endif ?>

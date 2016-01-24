@@ -1,0 +1,10 @@
+<?php $this->inlineScript()->captureStart() ?>
+<?php if ($this->message && $this->code) { ?>
+    <?php if ($this->code == \TmCommon\Config\Config::POPUP_MESSAGE_SUCCESS_CODE) { ?>
+        showPopupMessage('<?php echo $this->translate($this->message) ?>', 0)
+    <?php } elseif ($this->code == \TmCommon\Config\Config::POPUP_MESSAGE_ERROR_CODE) { ?>
+        showPopupMessage('<?php echo $this->translate($this->message) ?>', 1)
+    <?php } ?>
+<?php } ?>
+<?php $this->inlineScript()->captureEnd() ?>
+<div class="message" title="<?php echo $this->translate('Click to close') ?>"></div>

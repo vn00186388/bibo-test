@@ -1,0 +1,16 @@
+<?php
+
+namespace TmCommon\Factory\ViewHelper;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+
+class DisplayTimeFactory implements FactoryInterface
+{
+    public function createService(ServiceLocatorInterface $sm)
+    {
+        $viewHelper = new \TmCommon\ViewHelper\DisplayTime();
+        return $viewHelper;
+    }
+}

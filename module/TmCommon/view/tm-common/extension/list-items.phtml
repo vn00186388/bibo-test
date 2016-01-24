@@ -1,0 +1,34 @@
+<h2><?php echo $this->translate('Categories') ?></h2>
+
+<?php if ($this->list): ?>
+
+    <table class="table">
+        <tr>
+            <th><?php echo $this->translate('Categories') ?></th>
+            <th><?php echo $this->translate('Actions') ?></th>
+        </tr>
+        <?php foreach ($list as $category): ?>
+            <tr>
+                <td><?php echo $category->name ?></td>
+                <td>
+                    <a class="admin-action"
+                       href="<?php echo $this->url('product/list-products') . '?product-type-id=' . $category->id ?>">
+                        <?php echo $this->translate('Products') ?>
+                    </a>
+
+                    <a class="admin-action"
+                       href="<?php echo $this->url('product/product-type') . '?product-type-id=' . $category->id . '&redirect=' . $this->currentUrl() ?>">
+                        <?php echo $this->translate('Edit') ?>
+                    </a>
+
+                    <form
+                        action="<?php echo $this->url('product/remove-product-type') . '?redirect=' . $this->currentUrl() ?>"
+                        method="post">
+                        <input type="hidden" value="<?php echo $category->id ?>" name="productTypeId">
+                        <input class="admin-action-del" type="submit" value="<?php echo $this->translate('Delete') ?>">
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>

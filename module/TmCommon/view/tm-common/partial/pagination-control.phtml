@@ -1,0 +1,47 @@
+<?php
+$query = '';
+if ($this->queries) {
+    foreach ($this->queries as $key => $value) {
+        if ($value || $value != '') {
+            $query = $query . '&' . $key . '=' . $value;
+        }
+    }
+}
+?>
+
+<?php if ($this->pageCount > 0): ?>
+    <div class="pagination">
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <a href="<?php
+            echo $this->url() . '?page=' . $this->previous . $query;
+            ?>" class="prev">
+                <
+            </a> <span class="bar">  </span>
+        <?php else: ?>
+            <span class="disabled"><</span> <span class="bar">  </span>
+        <?php endif; ?>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <a href="<?php echo $this->url() . '?page=' . $page . $query; ?>">
+                    <?php echo $page; ?>
+                </a> <span class="bar">  </span>
+            <?php else: ?>
+                <a class="current"><?php echo $page; ?></a> <span class="bar"> </span>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <a href="<?php
+            echo $this->url() . '?page=' . $this->next . $query;
+            ?>" class="next">
+                >
+            </a>
+        <?php else: ?>
+            <span class="disabled">></span>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

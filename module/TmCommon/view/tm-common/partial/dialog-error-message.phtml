@@ -1,0 +1,14 @@
+<?php if ($this->message && $this->code == \TmCommon\Config\Config::POPUP_MESSAGE_ERROR_CODE) { ?>
+    <script>
+        $(document).ready(function () {
+            $('<div id="dialog" title="Notice"><?php echo $this->message ?></div>').dialog({
+                modal: true,
+                buttons: {
+                    Close: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        });
+    </script>
+<?php } ?>
