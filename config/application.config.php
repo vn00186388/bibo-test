@@ -14,6 +14,7 @@ return array(
         'Application',
         'BiBoUser',
         'BiBoBlog',
+        'BiBoComment',
         'TmCommon'
     ),
 

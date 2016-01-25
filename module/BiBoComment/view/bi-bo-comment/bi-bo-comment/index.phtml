@@ -14,15 +14,34 @@
     </div>
 </header>
 
+<!-- Main Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<form name="loginForm" method="post" enctype="application/x-www-form-urlencoded" action="">
-    User Name : <input type="text" name="username" id="username"/>
-    Password : <input type="password" name="password" id="password"/>
+<?php
+$paging = $this->paginationHelper($comments, $page, $this->url('bi-bo-comment', array('action' => 'index')), 10);
+foreach ($comments as $comment) : ; ?>
+    <div class="post-preview">
+        <a href="post.html">
+            <h2 class="post-title">
+                <?php echo $comment->content; ?>
+            </h2>
+            <h3 class="post-subtitle">
+                <?php echo $comment->blog->title; ?>
+            </h3>
+        </a>
+    </div>
+<hr>
 
-    <input type="submit" value="Login"/>
-</form>
-            </div>
+<?php endforeach; ?>
+
+
+<div class="paging">
+    <?php echo $paging; ?>
+</div>
+
+
+</div>
         </div>
     </div>
+

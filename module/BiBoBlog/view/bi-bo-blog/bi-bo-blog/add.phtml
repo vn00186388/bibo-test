@@ -1,19 +1,57 @@
-<?php
-// module/Album/view/album/album/add.phtml:
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('<?php echo $this->basePath('/img/home-bg.jpg') ; ?>')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <hr class="small">
+                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-$title = 'Add new bibo blog';
-$this->headTitle($title);
-?>
-    <h1><?php echo $this->escapeHtml($title); ?></h1>
-<?php
-$form->setAttribute('action', $this->url('bi-bo-blog', array('action' => 'add')));
-$form->prepare();
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <?php
 
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('title'));
-echo $this->formRow($form->get('slug'));
-echo $this->formRow($form->get('content'));
+            $title = 'Add new bibo blog';
+            $this->headTitle($title);
+            ?>
+            <h1><?php echo $this->escapeHtml($title); ?></h1>
+            <?php
+            $form->setAttribute('action', $this->url('bi-bo-blog', array('action' => 'add')));
+            $form->prepare();
 
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+            echo $this->form()->openTag($form);
+            echo $this->formHidden($form->get('id'));
+            ?>
+            <table>
+                <tr>
+                    <td> <?php echo $form->get('title')->getOption('label') ; ?></td>
+                    <td><?php echo $this->formInput($form->get('title'));  ?></td>
+                </tr>
+
+                <tr>
+                    <td> <?php echo $form->get('slug')->getOption('label') ; ?></td>
+                    <td><?php echo $this->formInput($form->get('slug'));  ?></td>
+                </tr>
+
+                <tr>
+                    <td> <?php echo $form->get('content')->getOption('label') ; ?></td>
+                    <td><?php echo $this->formInput($form->get('content'));  ?></td>
+                </tr>
+
+                <tr>
+                    <td> <?php echo $this->formSubmit($form->get('submit')); ?> </td>
+                </tr>
+            </table>
+            <?php echo $this->form()->closeTag(); ?>
+
+        </div>
+    </div>
+</div>

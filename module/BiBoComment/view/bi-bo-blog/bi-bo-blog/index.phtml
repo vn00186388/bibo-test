@@ -1,0 +1,40 @@
+<?php
+$paging = $this->paginationHelper($blogs, $page, $this->url('bi-bo-blog', array('action' => 'index')), 10);
+foreach ($blogs as $blog) : ; ?>
+    <div class="post-preview">
+        <a href="post.html">
+            <h2 class="post-title">
+                <?php echo $blog->title; ?>
+            </h2>
+            <h3 class="post-subtitle">
+                <?php echo $blog->slug; ?>
+            </h3>
+        </a>
+        <p class="post-meta">Posted by <a href="#"><?php echo $blog->user->username ; ?></a> on <?php echo $blog->createdAt->format('F j,Y') ?></p>
+    </div>
+    <hr>
+    <!--    <tr>-->
+    <!--        <td> --><?php //echo $blog['id'] ; ?><!--</td>-->
+    <!--        <td> --><?php //echo $blog['title'] ; ?><!--</td>-->
+    <!--        <td> --><?php //echo $blog['slug'] ; ?><!--</td>-->
+    <!--        <td> --><?php //echo $blog['content'] ; ?><!--</td>-->
+    <!--        <td>-->
+    <!--            <a href="--><?php //echo $this->url('bi-bo-blog', array('action'=>'edit','id' => $blog['id']));?><!--">-->
+    <!--                Edit-->
+    <!--            </a>-->
+    <!---->
+    <!--            <a href="--><?php //echo $this->url('bi-bo-blog', array('action'=>'delete','id' => $blog['id']));?><!--">-->
+    <!--                Delete-->
+    <!--            </a>-->
+    <!--        </td>-->
+    <!--    </tr>-->
+<?php endforeach; ?>
+
+
+<div class="paging">
+    <?php echo $paging; ?>
+</div>
+
+
+
+

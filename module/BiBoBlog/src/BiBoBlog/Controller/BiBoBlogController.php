@@ -13,51 +13,64 @@ class BiBoBlogController extends AbstractActionController
     protected $biboBlogService ;
 
     protected $biboBlogForm ;
+    protected $biboCommentForm ;
 
     protected $options ;
 
 
-    public function __construct($biboBlogService, $options, $biboBlogForm)
+    public function __construct($biboBlogService, $options, $biboBlogForm, $biboCommentForm)
     {
         $this->biboBlogService = $biboBlogService;
         $this->options = $options;
         $this->biboBlogForm = $biboBlogForm ;
+        $this->biboCommentForm = $biboCommentForm ;
     }
 
     public function indexAction()
     {
         $page = $this->params()->fromRoute('page', 1);
-
+        $form = $this->getBiBoCommentForm() ;
         $limit = 10;
         $offset = ($page == 0) ? 0 : ($page - 1) * $limit;
 
         $container = new Container('user_login') ;
 
-        $blogs = $this->getBiBoBlogService()->listBiBoBlogs($container->user, $offset, $limit) ;
+        $is_login = isset($container->user) && !is_null($container->user) ? 1 : 0 ;
+
+        $blogs = $this->getBiBoBlogService()->listBiBoBlogs($offset, $limit) ;
 
         return new ViewModel(array(
             'blogs' => $blogs,
-            'page' => $page
+            'page' => $page,
+            'form' => $form,
+            'login' => $is_login
         ));
 
     }
 
     public function addAction() {
-        $form = $this->getBiBoBlogForm() ;
-        $request = $this->getRequest();
         $container = new Container('user_login') ;
+        if (isset($container->user) && !is_null($container->user) ) {
+            $form = $this->getBiBoBlogForm() ;
+            $request = $this->getRequest();
+            $container = new Container('user_login') ;
 
-        if ($request->isPost()) {
-            $blog = new BiBoBlog() ;
-            $form->setInputFilter($blog->getInputFilter()) ;
-            $form->setData($request->getPost());
+            if ($request->isPost()) {
+                $blog = new BiBoBlog() ;
+                $form->setInputFilter($blog->getInputFilter()) ;
+                $form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $this->getBiBoBlogService()->addBiBoBlog($form->getData(), $container->user, $form->getHydrator()) ;
-                return $this->redirect()->toRoute('bi-bo-blog');
+                if ($form->isValid()) {
+                    $this->getBiBoBlogService()->addBiBoBlog($form->getData(), $container->user, $form->getHydrator()) ;
+                    return $this->redirect()->toRoute('bi-bo-blog');
+                }
             }
+            return array('form' => $form);
         }
-        return array('form' => $form);
+        else {
+            return $this->redirect()->toRoute('bi-bo-user');
+        }
+
     }
 
     public function editAction() {
@@ -131,6 +144,18 @@ class BiBoBlogController extends AbstractActionController
         );
     }
 
+    public function viewAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $blog = $this->getBiBoBlogService()->getBiBoBlog($id) ;
+
+        return new ViewModel(
+            array(
+                'blog' => $blog
+            )
+        );
+
+    }
+
 
 
     public function setBiBoBlogService($biboBlogService) {
@@ -171,6 +196,22 @@ class BiBoBlogController extends AbstractActionController
     public function getBiBoBlogForm()
     {
         return $this->biboBlogForm;
+    }
+
+    /**
+     * @param \BiBoBlog\Form\BiBoBlogForm $biboBlogForm
+     */
+    public function setBiBoCommentForm($biboCommentForm)
+    {
+        $this->biboCommentForm = $biboCommentForm;
+    }
+
+    /**
+     * @return \BiBoBlog\Form\BiBoBlogForm
+     */
+    public function getBiBoCommentForm()
+    {
+        return $this->biboCommentForm;
     }
 
 

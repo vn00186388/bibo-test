@@ -52,7 +52,7 @@ class BiBoBlogService extends CommonService
         return $this->options;
     }
 
-    public function listBiBoBlogs ($user, $offset = 0, $limit = 10) {
+    public function listBiBoBlogs ($offset = 0, $limit = 10) {
 
         $BiBoBlogEC = $this->getOptions()->getBiBoBlogEntityClass();
 

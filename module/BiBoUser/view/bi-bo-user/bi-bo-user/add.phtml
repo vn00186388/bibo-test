@@ -1,3 +1,22 @@
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('<?php echo $this->basePath('/img/home-bg.jpg') ; ?>')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <hr class="small">
+                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <?php
 // module/Album/view/album/album/add.phtml:
 
@@ -11,11 +30,44 @@ $form->prepare();
 
 echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('email_address'));
-echo $this->formRow($form->get('password'));
-echo $this->formRow($form->get('username'));
-echo $this->formRow($form->get('first_name'));
-echo $this->formRow($form->get('last_name'));
-echo $this->formRow($form->get('deleted_flag'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+?>
+<table>
+    <tr>
+        <td> <?php echo $form->get('email_address')->getOption('label') ; ?></td>
+        <td><?php echo $this->formInput($form->get('email_address'));  ?></td>
+    </tr>
+
+    <tr>
+        <td> <?php echo $form->get('password')->getOption('label') ; ?></td>
+        <td><?php echo $this->formInput($form->get('password'));  ?></td>
+    </tr>
+
+    <tr>
+        <td> <?php echo $form->get('username')->getOption('label') ; ?></td>
+        <td><?php echo $this->formInput($form->get('username'));  ?></td>
+    </tr>
+
+    <tr>
+        <td> <?php echo $form->get('first_name')->getOption('label') ; ?></td>
+        <td><?php echo $this->formInput($form->get('first_name'));  ?></td>
+    </tr>
+
+    <tr>
+        <td> <?php echo $form->get('last_name')->getOption('label') ; ?></td>
+        <td><?php echo $this->formInput($form->get('last_name'));  ?></td>
+    </tr>
+
+    <tr>
+        <td> <?php echo $form->get('deleted_flag')->getOption('label') ; ?></td>
+        <td><?php echo $this->formCheckbox($form->get('deleted_flag'));  ?></td>
+    </tr>
+    <tr>
+        <td> <?php echo $this->formSubmit($form->get('submit')); ?> </td>
+
+    </tr>
+
+</table>
+<?php echo $this->form()->closeTag(); ?>
+</div>
+        </div>
+    </div>

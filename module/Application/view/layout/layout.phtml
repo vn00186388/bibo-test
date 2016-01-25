@@ -52,17 +52,24 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+
                         <li>
-                            <a href="<?php echo $this->url('home') ?>">Home</a>
+                            <a href="<?php echo $this->url('bi-bo-user', array('action' => 'index')) ?>">Login</a>
                         </li>
                         <li>
-                            <a href="<?php echo $this->url('bi-bo-user', array('action' => 'index')) ?>">User</a>
+                            <a href="<?php echo $this->url('bi-bo-user', array('action' => 'add')) ?>">Register</a>
                         </li>
                         <li>
-                            <a href="<?php echo $this->url('bi-bo-user', array('action' => 'add')) ?>">Add User</a>
+                            <a href="<?php echo $this->url('home') ?>">Blog</a>
                         </li>
                         <li>
-                            <a href="<?php echo $this->url('bi-bo-blog', array('action' => 'add')) ?>">Add blog</a>
+                            <a href="<?php echo $this->url('bi-bo-blog', array('action' => 'add')) ?>">Add Blog</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url('bi-bo-comment', array('action' => 'index')) ?>">Comment</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url('bi-bo-comment', array('action' => 'add')) ?>"> Add Comment</a>
                         </li>
                     </ul>
                 </div>

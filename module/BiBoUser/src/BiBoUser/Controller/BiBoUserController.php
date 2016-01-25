@@ -60,6 +60,17 @@ class BiBoUserController extends AbstractActionController
         return array('form' => $form);
     }
 
+    public function logoutAction() {
+        $container = new Container('user_login') ;
+
+        if (isset($container->user) && !is_null($container->user)) {
+            unset($container->user) ;
+        }
+        else {
+            return $this->redirect()->toRoute('bi-bo-user');
+        }
+    }
+
 
 
     public function setBiBoUserService($biboUserService) {

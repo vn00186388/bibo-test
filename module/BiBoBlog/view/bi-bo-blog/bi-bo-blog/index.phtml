@@ -1,38 +1,77 @@
-<?php
-$paging = $this->paginationHelper($blogs, $page, $this->url('bi-bo-blog', array('action' => 'index')), 10);
-foreach ($blogs as $blog) : ; ?>
-    <div class="post-preview">
-        <a href="post.html">
-            <h2 class="post-title">
-                <?php echo $blog->title; ?>
-            </h2>
-            <h3 class="post-subtitle">
-                <?php echo $blog->slug; ?>
-            </h3>
-        </a>
-        <p class="post-meta">Posted by <a href="#"><?php echo $blog->user->username ; ?></a> on <?php echo $blog->createdAt->format('F j,Y') ?></p>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('<?php echo $this->basePath('/img/home-bg.jpg') ; ?>')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <hr class="small">
+                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <hr>
-    <!--    <tr>-->
-    <!--        <td> --><?php //echo $blog['id'] ; ?><!--</td>-->
-    <!--        <td> --><?php //echo $blog['title'] ; ?><!--</td>-->
-    <!--        <td> --><?php //echo $blog['slug'] ; ?><!--</td>-->
-    <!--        <td> --><?php //echo $blog['content'] ; ?><!--</td>-->
-    <!--        <td>-->
-    <!--            <a href="--><?php //echo $this->url('bi-bo-blog', array('action'=>'edit','id' => $blog['id']));?><!--">-->
-    <!--                Edit-->
-    <!--            </a>-->
-    <!---->
-    <!--            <a href="--><?php //echo $this->url('bi-bo-blog', array('action'=>'delete','id' => $blog['id']));?><!--">-->
-    <!--                Delete-->
-    <!--            </a>-->
-    <!--        </td>-->
-    <!--    </tr>-->
-<?php endforeach; ?>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <?php if ($login) : ?>
+            <a href="<?php echo $this->url('bi-bo-blog', array('action' => 'add')) ; ?>"> Add Blog</a>
+            <?php else : echo 'You must login to add blog.' ;endif ;
+            $paging = $this->paginationHelper($blogs, $page, $this->url('bi-bo-blog', array('action' => 'index')), 10);
+            foreach ($blogs as $blog) : ; ?>
+
+                <div class="post-preview">
+                    <a href="<?php echo $this->url('bi-bo-blog', array('action' => 'view', 'id' => $blog->id)) ?>">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h2 class="post-title">
+                                    <?php echo $blog->title; ?>
+                                </h2>
+                            </div>
+                            <div class="col-sm-4">
+                                <?php if ($login) : ?>
+                                <a href="<?php echo $this->url('bi-bo-blog',
+                                    array('action' => 'edit' , 'id' => $blog->id)) ?>"> Edit</a>
+                                <a href="<?php echo $this->url('bi-bo-blog',
+                                    array('action' => 'delete', 'id' => $blog->id )) ?>"> Delete
+                                </a>
+                                <a href="<?php echo $this->url('bi-bo-comment',
+                                    array('action' => 'add', 'id' => $blog->id )) ?>"> Add Comment
+                                </a>
+                                <?php else :  echo 'You must login to do action on blog.' ; endif ;?>
+
+                            </div>
+                        </div>
 
 
-<div class="paging">
-    <?php echo $paging; ?>
+                        <h3 class="post-subtitle">
+                            <?php echo $blog->slug; ?>
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#"><?php echo $blog->user->username ; ?></a> on <?php echo $blog->createdAt->format('F j,Y') ?></p>
+                </div>
+                <div>
+                    <?php foreach ($blog->comments as $comment) : ?>
+                        <p><?php echo $comment->content ; ?></p>
+                    <?php endforeach ; ?>
+                </div>
+
+                <hr>
+
+            <?php endforeach; ?>
+
+
+            <div class="paging">
+                <?php echo $paging; ?>
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 

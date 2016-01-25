@@ -1,8 +1,7 @@
 <?php
 
-namespace BiBoBlog\Entity;
+namespace BiBoComment\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use TmCommon\Common\CommonEntity;
 
@@ -14,10 +13,10 @@ use Zend\InputFilter\InputFilterInterface ;
 /**
  * OdiDiary
  *
- * @ORM\Table(name="blogs")
+ * @ORM\Table(name="comments")
  * @ORM\Entity
  */
-class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
+class BiBoComment extends CommonEntity implements InputFilterAwareInterface
 {
 
     /**
@@ -29,21 +28,17 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
     protected $id;
 
     /**
-     * @var string
+     * @var Blog
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="\BiBoBlog\Entity\BiBoBlog", inversedBy="comments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="blog_id", referencedColumnName="id")
+     * })
      */
-    protected $title;
+    protected $blog;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255,  nullable=true)
-     */
-    protected $slug;
-
-    /**
-     * @var string
+     * @var text
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
@@ -63,45 +58,27 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
      */
     protected $updatedAt;
 
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="\BiBoUser\Entity\BiBoUser", inversedBy="blogs")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    protected $user;
 
-    // ...
-    /**
-     * @ORM\OneToMany(targetEntity="\BiBoComment\Entity\BiBoComment", mappedBy="blog")
-     */
-    protected $comments;
 
-    public function __construct() {
-        parent::__construct() ;
-        $this->comments = new ArrayCollection();
-    }
 
 
 
     protected $inputFilter;
 
     /**
-     * @return mixed
+     * @return Blog
      */
-    public function getComments()
+    public function getBlog()
     {
-        return $this->comments;
+        return $this->blog;
     }
 
     /**
-     * @param mixed $comments
+     * @param Blog $blog
      */
-    public function setComments($comments)
+    public function setBlog($blog)
     {
-        $this->comments = $comments;
+        $this->blog = $blog;
     }
 
     /**
@@ -120,37 +97,6 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
 
     /**
      * @return string
@@ -168,21 +114,6 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
         $this->content = $content;
     }
 
-    /**
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
 
 
     /**
@@ -229,7 +160,7 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
             $inputFilter = new InputFilter();
 
             $inputFilter->add(array(
-                'name'     => 'title',
+                'name'     => 'content',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -241,7 +172,7 @@ class BiBoBlog extends CommonEntity implements InputFilterAwareInterface
                         'options' => array(
                             'encoding' => 'UTF-8',
                             'min'      => 1,
-                            'max'      => 100,
+                            'max'      => 2525,
                         ),
                     ),
                 ),
