@@ -36,7 +36,7 @@ msgstr "أهلا بك في  %sZend Framework 2%s"
 
 #: ../view/application/index/index.phtml:3
 #, php-format
-msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2."
+msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This bi-bo-user can serve as a simple starting point for you to begin building your application on ZF2."
 msgstr "تهانينا! لقد قمت بتثبيت %s التطبيق الهيكلي لـ ZF2 %s بنجاح. أنت تقوم حاليا بتشغيل النسخة %s من Zend Framework. تستطيع أن تستعمل هذا التطبيق الهيكلي كنقطة إنطلاق سهلة لبناء التطبيق الخاص بك باستخدام ZF2.  "
 
 #: ../view/application/index/index.phtml:4

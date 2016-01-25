@@ -16,6 +16,10 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $blogs = $this->getBiBoBlogService()->listBiBoBlogs() ;
+
+        return new ViewModel(array(
+            'blogs' => $blogs,
+        ));
     }
 }

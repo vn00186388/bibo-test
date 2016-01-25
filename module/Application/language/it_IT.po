@@ -37,7 +37,7 @@ msgstr "Benvenuto in %sZend Framework 2%s"
 
 #: ../view/application/index/index.phtml:3
 #, php-format
-msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2."
+msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This bi-bo-user can serve as a simple starting point for you to begin building your application on ZF2."
 msgstr "Congratulazioni! Hai appena installato con successo %sZF2 Skeleton Application%s e stai utilizzando la versione %s di Zend Framework. Questa struttura può servirti come semplice punto di riferimento per iniziare a costruire un'applicazione basata su ZF2."
 
 #: ../view/application/index/index.phtml:4

@@ -34,7 +34,7 @@ msgstr "Chào mừng bạn sử dụng %sZend Framework 2%s"
 
 #: ../view/application/index/index.phtml:3
 #, php-format
-msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2."
+msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This bi-bo-user can serve as a simple starting point for you to begin building your application on ZF2."
 msgstr "Xin chúc mừng! Bạn đã cài đặt thành công %sZF2 Skeleton Application%s. Bạn hiện đang sử dụng Zend Framework phiên bản %s. Ứng dung khung có thể phục vụ bạn như một điểm bắt đầu đơn giản để bạn bắt tay vào việc xây dựng ứng dụng riêng của mình trên nền ZF2."
 
 #: ../view/application/index/index.phtml:4
