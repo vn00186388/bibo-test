@@ -33,7 +33,7 @@
                                 </h2>
                             </div>
                             <div class="col-sm-4">
-                                <?php if ($login) : ?>
+                                <?php if ($login && $blog->user->id == $user->id) : ?>
                                 <a href="<?php echo $this->url('bi-bo-blog',
                                     array('action' => 'edit' , 'id' => $blog->id)) ?>"> Edit</a>
                                 <a href="<?php echo $this->url('bi-bo-blog',
@@ -42,7 +42,7 @@
                                 <a href="<?php echo $this->url('bi-bo-comment',
                                     array('action' => 'add', 'id' => $blog->id )) ?>"> Add Comment
                                 </a>
-                                <?php else :  echo 'You must login to do action on blog.' ; endif ;?>
+                                <?php else :  echo 'You do not have authorized to do this action.' ; endif ;?>
 
                             </div>
                         </div>

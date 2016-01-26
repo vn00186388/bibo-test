@@ -52,40 +52,47 @@ class BiBoBlogService extends CommonService
         return $this->options;
     }
 
-    public function listBiBoBlogs ($offset = 0, $limit = 10) {
+    public function listBiBoBlogs ($offset = 0, $limit = 10, $option = 0) {
 
         $BiBoBlogEC = $this->getOptions()->getBiBoBlogEntityClass();
 
         $em = $this->getEntityManager() ;
-        $qb = $em->createQueryBuilder();
 
-        $qb->select('u')
-            ->from($BiBoBlogEC, 'u')
-            ->orderBy('u.createdAt','DESC')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
+        if (!$option) {
+            $qb = $em->createQueryBuilder();
 
-        $query = $qb->getQuery();
+            $qb->select('u')
+                ->from($BiBoBlogEC, 'u')
+                ->orderBy('u.createdAt','DESC')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
 
-        $paginator = new Paginator( $query );
+            $query = $qb->getQuery();
 
-        return $paginator;
+            $paginator = new Paginator( $query );
 
-//        return $em->createQuery("SELECT di FROM ".$BiBoBlogEC." di JOIN di.user u where u.id =". $user->id. " order by di.createdAt DESC")->getResult() ;
-
-
-//        $resultSet = $this->tableGateway->select();
-//        return $resultSet;
+            return $paginator;
+        }
+        else {
+            return $em->createQuery("SELECT di FROM ".$BiBoBlogEC." di order by di.createdAt DESC")->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY) ;
+        }
     }
 
-
-
-
-    public function getBiBoBlog($id) {
+    public function getBiBoBlog($id, $option = 0) {
 
         $BiBoBlogEC = $this->getOptions()->getBiBoBlogEntityClass();
         $em = $this->getEntityManager() ;
-        return  $em->createQuery("SELECT di FROM ".$BiBoBlogEC." di  where di.id =".$id)->getSingleResult() ;
+        if (!$option)
+            return  $em->createQuery("SELECT di FROM ".$BiBoBlogEC." di  where di.id =".$id)->getSingleResult() ;
+        else {
+            $data = $em->createQuery("SELECT di FROM ".$BiBoBlogEC." di  where di.id =".$id)->getSingleResult(\Doctrine\ORM\Query::HYDRATE_ARRAY) ;
+
+            $data['createdAt'] = date_format($data['createdAt'],DATETIME_FORMAT) ;
+            $data['updatedAt'] = date_format($data['updatedAt'], DATETIME_FORMAT) ;
+
+            return $data ;
+
+        }
     }
 
     public function addBiBoBlog($data, $user, $hydrator) { //// IN service

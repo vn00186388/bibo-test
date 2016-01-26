@@ -4,6 +4,8 @@ return array(
     'controllers' => array(
         'factories' => array(
             'BiBoBlog\Controller\BiBoBlogController' => 'BiBoBlog\Factory\BiBoBlogControllerFactory',
+            'BiBoBlog\Controller\BiBoBlogRestController' => 'BiBoBlog\Factory\BiBoBlogRestControllerFactory',
+
         ),
     ),
 
@@ -24,11 +26,26 @@ return array(
                     ),
                 ),
             ),
+            'bi-bo-blog-rest' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/blog-rest[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'BiBoBlog\Controller\BiBoBlogRestController',
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
             'bi-bo-blog' => __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
 
     ),

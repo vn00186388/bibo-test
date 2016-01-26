@@ -43,7 +43,8 @@ class BiBoBlogController extends AbstractActionController
             'blogs' => $blogs,
             'page' => $page,
             'form' => $form,
-            'login' => $is_login
+            'login' => $is_login,
+            'user' => $container->user
         ));
 
     }
